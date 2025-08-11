@@ -45,6 +45,17 @@ Aimed at researchers, hobbyists, and creators interested in the intersection of 
 
     Save and load model checkpoints for further experimentation
 
+📁 Code Structure
+
+.<br>
+dracula-ai/<br>
+├── static/<br> 
+│   ├── index.html &nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp; Main web UI page<br>
+│   └── favicon.ico &nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp; Site icon<br>
+├── app.py &nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp; FastAPI main app entrypoint<br>
+├── model_code.py &nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp; AI model code (loading, text generation functions, etc)<br>
+├── model.pth &nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp; PyTorch model checkpoint file (weights)<br>
+
 ⚙️ How It Works
 
 🧠 Model Architecture
