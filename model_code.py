@@ -1,6 +1,7 @@
 import tiktoken
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 
 #####################################
@@ -228,6 +229,34 @@ def generate_text_simple(model, idx, max_new_tokens, context_size):
 
     return idx
 
+def generate_text_advanced(model, idx, max_new_tokens, context_size,
+                           temperature=1.0, top_k=None):
+    # idx shape: (B, T)
+    for _ in range(max_new_tokens):
+        idx_cond = idx[:, -context_size:]
+
+        with torch.no_grad():
+            logits = model(idx_cond)
+
+        logits = logits[:, -1, :]  # (B, vocab_size)
+
+        # Apply temperature
+        logits = logits / temperature
+
+        if top_k is not None:
+            # Top-k filtering
+            values, _ = torch.topk(logits, top_k)
+            min_values = values[:, -1].unsqueeze(1)
+            logits = torch.where(logits < min_values, torch.tensor(float('-inf'), device=logits.device), logits)
+
+        probs = F.softmax(logits, dim=-1)
+
+        # Sample from the distribution
+        idx_next = torch.multinomial(probs, num_samples=1)
+
+        idx = torch.cat((idx, idx_next), dim=1)
+
+    return idx
 
 if __name__ == "__main__":
 
@@ -256,11 +285,19 @@ if __name__ == "__main__":
     print("Encoded input text:", encoded)
     print("encoded_tensor.shape:", encoded_tensor.shape)
 
-    out = generate_text_simple(
+    # out = generate_text_simple(
+    #     model=model,
+    #     idx=encoded_tensor,
+    #     max_new_tokens=10,
+    #     context_size=GPT_CONFIG_124M["context_length"]
+    # )
+    out = generate_text_advanced(
         model=model,
-        idx=encoded_tensor,
-        max_new_tokens=10,
-        context_size=GPT_CONFIG_124M["context_length"]
+        idx=input_ids,
+        max_new_tokens=150,
+        context_size=context_size,
+        temperature=0.8,
+        top_k=40
     )
     decoded_text = tokenizer.decode(out.squeeze(0).tolist())
 
