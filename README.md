@@ -1,37 +1,37 @@
-# Dracula-AI-Model
-AI model trained from the novel Dracula by Bram Stoker.
+# Dracula AI Agent
+#### VampChat: Talk with Dracula
+
+An interactive chatbot trained on Bram Stoker’s Dracula.
+Built with a custom GPT-style model in PyTorch, deployed via FastAPI + Nginx, and featuring a real-time chat UI.
 
 Author: Timothy Johnson <br>
-Date: May 2024
+Date: August 2025
 
-### Hugging Face Model
+### Live Demo
 
-[Dracula AI Model](https://huggingface.co/MrTimmyJ/Dracula/tree/main)
+[Dracula AI Agent - VampChat](http://143.198.51.64/dracula-ai/)
 
 ## Overview
 
-&nbsp;&nbsp;&nbsp;&nbsp; A transformer-based language model trained on Bram Stoker’s *Dracula*, built using PyTorch and GPT-2 tokenization.
-This project explores fine-tuning and training techniques to generate horror-themed literary text in the style of Gothic fiction. Ideal for experimentation, interactive demos, and literary AI research.
+&nbsp;&nbsp;&nbsp;&nbsp; Dracula AI Agent is an interactive, full-stack AI chatbot trained on Bram Stoker’s Dracula. Originally built as a Hugging Face model, it has since been expanded into a production-ready FastAPI web service, hosted on an Ubuntu server with Nginx.
 
-&nbsp;&nbsp;&nbsp;&nbsp; Dracula-AI-Model is a command-line AI tool that generates literary text in the style of Dracula.
-It uses a GPT-style transformer architecture, trained on the full novel using PyTorch.
-Tokenization is handled by OpenAI’s tiktoken, and training performance is visualized with Matplotlib.
-
-Aimed at researchers, hobbyists, and creators interested in the intersection of AI and classic literature.
+&nbsp;&nbsp;&nbsp;&nbsp; The system combines a PyTorch-based GPT-style model (trained from scratch with tiktoken tokenization) and a frontend chat UI (“VampChat”) that allows users to converse with Dracula in real time. This project demonstrates expertise in machine learning, backend deployment, and AI-driven web applications.
 
 🧩 Features
 
-    📚 Trains a GPT-style model using full-text Dracula dataset
+    📚 Custom GPT Model: Transformer-style architecture trained on full Dracula text.
 
-    🔠 GPT-2-compatible tokenization via tiktoken
+    🔡 tiktoken Tokenization: GPT-2 compatible encoding for efficient batching.
 
-    🔁 Custom training loop and evaluation pipeline with PyTorch
+    🔁 Training Pipeline: PyTorch training loop with checkpointing and evaluation.
 
-    📉 Tracks training/validation loss and tokens seen
+    📈 Diagnostics: Real-time loss visualization with Matplotlib.
 
-    🧠 Generates character-consistent and Gothic-style sample text
+    🧛 Interactive Chat UI: Web frontend where users “talk with Dracula.”
 
-    💾 Save/load checkpoints with torch.save() / torch.load()
+    🌐 Web Deployment: Hosted with FastAPI + Nginx on Ubuntu server.
+
+    ⚡ REST API Integration: Frontend ↔ backend messaging for chat responses.
 
 🔄 User Workflow
 
@@ -60,58 +60,85 @@ dracula-ai/<br>
 
 🧠 Model Architecture
 
-    Custom GPT-like model (GPTModel) with positional embeddings
-
-    Trained with cross_entropy loss and AdamW optimizer
-
-    Evaluation at configurable intervals using validation loader
+    GPT-style transformer with token and positional embeddings
+    
+    Trained with cross-entropy loss using AdamW
+    
+    Inference supports temperature/top-k sampling for varied outputs
 
 📊 Tokenization & Data Pipeline
 
-    Tokenizer: tiktoken with GPT-2 encoding
-
-    Dataset split into context-length windows with shifting
-
-    Dataloader provides batched training and target input tensors
+    tiktoken (GPT-2) encoding for efficient tokenization
+    
+    Text chunked into fixed-length context windows with stride
+    
+    PyTorch DataLoader batches/shuffles train/validation splits
 
 🧪 Training & Evaluation
 
-    Runs multiple epochs over training data
+    Multi-epoch training with periodic validation passes
+    
+    Loss tracking and visualization for diagnostics
+    
+    Checkpoint save/load via torch.save / torch.load
 
-    Tracks training/validation loss at intervals
+🖥️ Backend API
 
-    Optional sample generation during training
+    FastAPI endpoints (e.g., /generate) serve model inference
+    
+    JSON request/response schema for prompts and outputs
+    
+    CORS enabled for browser clients behind Nginx
 
-    Saves model state dict for persistence
+💬 Frontend
+
+    HTML/CSS/JavaScript chat UI (“VampChat”)
+    
+    Sends user prompts to the API; renders model replies (optionally streamed)
+    
+    Simple session controls (new chat/clear history)
+
+🌐 Hosting & Deployment
+    
+    Deployed on Ubuntu with Nginx reverse proxying to the FastAPI app
+    
+    Nginx serves static frontend and proxies API requests
+    
+    Basic logging/monitoring for reliable production use
 
 🖼️ Screenshots / Visuals
 
-![draculabanner](https://github.com/user-attachments/assets/023fe25a-a41e-4ccc-a81e-05166d9be985)
+<img width="1024" height="768" alt="vampchat_banner" src="https://github.com/user-attachments/assets/73fd4f8f-6e22-4fd6-8626-e3e49db6d27a" />
 
 🧰 Technologies Used
 
     🐍 Python	Core programming language
     
-    🔦 PyTorch	Deep learning framework
+    🔦 PyTorch	ML framework
     
-    🔡 tiktoken	GPT-2 tokenization library
+    🔡 tiktoken	GPT-2 tokenization
     
-    🧠 Custom GPT	Transformer model built from scratch
+    🧠 Custom GPT Transformer	model implementation
     
-    🧪 AdamW	Optimizer for stable convergence
+    📈 Matplotlib	training visualization
     
-    📈 Matplotlib	Visualizing training and validation loss
+    🚀 FastAPI	backend API for serving model
     
-    📁 File I/O	Data reading and checkpoint saving
+    🌐 JavaScript (ES6), HTML, CSS	chat frontend
+
+    🐧 Ubuntu Server + Nginx	production deployment
+
+    💾 torch.save / torch.load	checkpointing
 
 🚀 Getting Started
 
     To clone and run this project locally:
 
-      git clone https://github.com/MrTimmyJ/Dracula-AI-Model.git
-      cd Dracula-AI-Model
+      git clone https://github.com/MrTimmyJ/Dracula-AI-Agent.git
+      cd Dracula-AI-Agent
       pip install pytorch
-      python src/gpt_train.py
+
+      Open static/index.html
 
       ⚠️ Requires Python 3.8+ and PyTorch installed (https://pytorch.org/get-started)
 
