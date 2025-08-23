@@ -11,6 +11,10 @@ Date: August 2025
 
 [Dracula AI Agent - VampChat](http://143.198.51.64/dracula-ai/)
 
+### Hugging Face Model
+
+[Dracula AI Model](https://huggingface.co/MrTimmyJ/Dracula/tree/main)
+
 ## Overview
 
 &nbsp;&nbsp;&nbsp;&nbsp; Dracula AI Agent is an interactive, full-stack AI chatbot trained on Bram Stoker’s Dracula. Originally built as a Hugging Face model, it has since been expanded into a production-ready FastAPI web service, hosted on an Ubuntu server with Nginx.
