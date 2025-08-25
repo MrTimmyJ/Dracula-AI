@@ -123,6 +123,8 @@ dracula-ai/<br>
     🔡 tiktoken	GPT-2 tokenization
     
     🧠 Custom GPT Transformer	model implementation
+
+    🧪 AdamW	Optimizer for stable convergence
     
     📈 Matplotlib	training visualization
     
